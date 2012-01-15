@@ -3,7 +3,9 @@
 	$text = $_POST['Body'];
 	$from = $_POST['From'];
 
-	if(!user_exists($from)) {
+	include 'mysql-connect.php';
+
+	if(!mysql_query("SELECT * FROM Users WHERE Phone='$from'")) {
 		//Create new user
 		$sms_msg = "Hi! Looks like you're new to Relationship Extender, the {Boy,Girl}friend Management System of the future.
 			Please tell us your name so we can get you to stop sleeping on the couch ;)"
