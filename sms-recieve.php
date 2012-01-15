@@ -5,12 +5,12 @@
 
 	include 'mysql-connect.php';
 
-	if(!mysql_query("SELECT * FROM Users WHERE Phone='$from'")) {
+	//	if(!mysql_query("SELECT * FROM Users WHERE Phone='$from'")) {
+	if(true) {
 		//Create new user
 		$sms_msg = "Hi! Looks like you're new to Relationship Extender, the {Boy,Girl}friend Management System of the future.
-			Please tell us your name so we can get you to stop sleeping on the couch ;)"
-
-		respond($sms_mesg);
+			Please tell us your name so we can get you to stop sleeping on the couch ;)";
+		respond($sms_msg);
 		return;
 	}
 	else {
@@ -35,8 +35,7 @@
 				$sms_msg = add_hate(array_shift($msg_arr));
 				break;
 			default:
-				$sms_msg = "Not a command! Send a text with \"help\" for more info!"
-				break;
+				$sms_msg = "Not a command! Send a text with \"help\" for more info!";
 		}
 
 		if(!isset($sms_msg) || strcmp($sms_msg, "") == 0) {
@@ -51,15 +50,15 @@
 	}
 
 	function print_help() {
-		$mesg = "date <name>: Add a significant other\r\nbreakup: Breakup\r\nlike <foo>,...: Add a like\r\nhate <bar>,...: Add a hate"
+		$mesg = "date <name>: Add a significant other\r\nbreakup: Breakup\r\nlike <foo>,...: Add a like\r\nhate <bar>,...: Add a hate";
 		return $mesg;
 	}
 
 	function add_sig_other($sig_other) {
 		$mesg = '';
 		//Check if another significant other exists
-		if( ) { //Exists [TODO]
-			$mesg = "Sorry we don't support polygamy :(\r\nIt's totally NOT because we were too lazy to code this ;)"
+		if( true) { //Exists [TODO]
+			$mesg = "Sorry we don't support polygamy :(\r\nIt's totally NOT because we were too lazy to code this ;)";
 			return $mesg;
 		}
 
@@ -73,7 +72,7 @@
 
 	function del_sig_other($sig_other) {
 		//Check if significant other exists
-		if(! ) { //Does not exist [TODO]
+		if(!true) { //Does not exist [TODO]
 			$mesg = "You need to be dating someone before you breakup with them! Plus with me you won't be doing this!";
 			return $mesg;
 		}
@@ -84,7 +83,7 @@
 
 	function add_like($arr_likes) {
 		//Check if significant other exists
-		if(! ) { //Does not exist [TODO]
+		if(!true) { //Does not exist [TODO]
 			$mesg = "You need to be in a relationship (right hand doesn't count)!";
 			return $mesg;
 		}
@@ -97,7 +96,7 @@
 
 	function add_hate($arr_hates) {
 		//Check if significant other exists
-		if(! ) { //Does not exist [TODO]
+		if(!true ) { //Does not exist [TODO]
 			$mesg = "You need to be in a relationship (left hand doesn't count)!";
 			return $mesg;
 		}
@@ -110,13 +109,14 @@
 
 
 	function respond($sms_mesg) {
+		$verify = "2330-6148";
+
 		header("content-type: text/xml");
 		echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-		$sms_twiml = "<Sms>".$verify. $sms_msg."</Sms>"
-			echo <Response>
-			echo $sms_twiml
-			echo </Response>
-
+		$sms_twiml = "<Sms>".$verify. $sms_mesg."</Sms>";
+		echo '<Response>';
+		echo $sms_twiml;
+		echo '</Response>';
 	}
 
 ?>
