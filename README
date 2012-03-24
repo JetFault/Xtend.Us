@@ -3,3 +3,24 @@ The {Girl,Boy}friend Management System
 Never sleep on the couch again!
 
 Built At: Hack Idea by Jerry Reptak and Karina Ruzinov
+
+MongoDB: Store all the stuff
+	User:
+		Partner - Old and Current
+			Likes
+			Dislikes
+			Recommendations
+
+
+Hunch: Recommendation Engine to find related likes/dislikes
+
+Anniversary:
+	Hunch: Find similar things you might like
+	Etsy: Find gifts based on recommendations
+
+Stay in:
+	*Ordr.in: Find a movie at home and order in food and spend the night at home.
+	*Netflix: Watch recommended movies.
+	*NYTimes: Movie Reviews
+	
+
