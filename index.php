@@ -4,12 +4,7 @@
 
 session_start();
 
-if( isset($_SESSION)) {
-	echo FUCK THIS;
-}
-$userID = $_SESSION['userid'];
-
-if(isset($userID)) {
+if(isset($_SESSION['userid'])) {
 	header( 'Location: http://ruslug.rutgers.edu/~relext/main.php');
 	return;
 }
