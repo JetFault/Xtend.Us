@@ -1,15 +1,17 @@
 <?php
 
+	include("config.php");
+
 	require "Services/Twilio.php";
 	
-	$AccountSid = "";
-	$AuthToken = "";
+	$account_sid = $twilio_sid;
+	$auth_token = $twilio_token;
 
-	$twilNumber = "";
+	$twilNumber = $twilio_number;
 	
 	$prepend = "";
 
-	$client = new Services_Twilio($AccountSid, $AuthToken);
+	$client = new Services_Twilio($account_sid, $auth_token);
 
 	$people = array(
 //		"+3333333333" => "blah",
