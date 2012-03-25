@@ -4,6 +4,9 @@
 
 session_start();
 
+if( isset($_SESSION)) {
+	echo FUCK THIS;
+}
 $userID = $_SESSION['userid'];
 
 if(isset($userID)) {
