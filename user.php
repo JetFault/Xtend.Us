@@ -1,7 +1,14 @@
 <?php
 
 
-function deleteUser
+function deleteUser($userID){
+	$connection = new Mongo();
+	$db = $connection->allusers->list;
+
+	$criteria = array('ID' => $userID);
+
+	$db->remove($criteria);
+}
 
 
 function createUser($userID, $userName) {
@@ -18,14 +25,13 @@ function getName($userID) {
 	$connection = new Mongo();
 
 	$db = $connection->allusers->list;
-	echo $userID;
-	$result = $db->find();
-/*	
+	$criteria = array('ID' => $userID);
+	$result = $db->find($criteria);
+	
 	foreach ($result as $ob){
-		echo $ob["name"];
+		$doc = $ob["name"];
 	}
- */
-	return $result["name"];
+	return $doc;
 }
 function getNumber($userID) {
 	$db = $connection->allusers->list;
