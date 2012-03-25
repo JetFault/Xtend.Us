@@ -11,6 +11,13 @@ function createSigOther($userID, $sigName) {
 	 *
 	 * return sigID, mongo gives unique ids
 	 * */
+	$connection = new Mongo();
+	$collection = $connection->allusers->siglist;
+	$collection->update('$set' => array('active' => false));
+	$content = array("name" => $sigName,"active"=> true);
+	$db->insert($content);
+
+	return $content['_id'];
 }
 
 function addAnniversary($usrID, $sigID, $month, $day, $year) {
