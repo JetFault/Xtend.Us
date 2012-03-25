@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+
 <?php
 
 	$like = $_POST['like'];
@@ -22,3 +25,5 @@
 	}
 
 ?>
+
+</html>
