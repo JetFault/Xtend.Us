@@ -69,12 +69,17 @@ function getActiveSigOther($userID) {
 function getAllSigOthers($userID) {
 	/* This should return a list of sigIDs.
 	 * Sorted chronologically from recent to past
- */
+	 */
 
 }
 
 function removeActiveSigOther($userID) {
 }
 
+
+function getAllUserIDs() {
+
+	return $userID_arr;
+}
  
 ?>

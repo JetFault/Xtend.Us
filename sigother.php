@@ -21,7 +21,7 @@ function addAnniversary($usrID, $sigID, $month, $day, $year) {
 
 }
 
-function getAnniversary() {
+function getAnniversary($sigID) {
 	/* Should return array
 	 * day=>
 	 * month=>
@@ -57,7 +57,7 @@ function addDislike($userID,$sigusrID, $dislike) {
 	$doc = array("type"=> "dislike", "thing" => $dislike);
 	$collection->insert($doc);
 }
-
+function deleteThings($userID,
 function getLikes($usrID,$sigID) {
 	$connection = new Mongo();
 	$db = $connection->$usrID;
