@@ -1,0 +1,111 @@
+LongTail Video
+	JW Player
+	Javascript API
+	Plays Flash and HTML video
+	Geodata for certain video locations, will update twitter, google maps, etc.
+	jsfiddle.com/975bS
+
+	bits on the run - shoot video
+
+Parse.ly
+	Identify ideas in webpage. Has NLP.
+	hack.parsely.com/testparse
+
+NY Times API
+	developer.nytimes.com
+
+Aviary
+	Image Editing
+	api@aviary.com
+	@AviaryAPI
+
+Movable Ink
+	Crop live web content
+	Embed Data into emails
+	HTML5 Support
+	movableink.com
+
+	Countdown Timer
+		###### Email with a countdown toward anniversary with gift ideas from etsy
+	Geo Targeter
+	Local Maps
+	Creative Optimizer - Choose images, will eventually change to one where people clicked on most
+	Social Chatter
+	Tweets
+	WebCrop
+		###### Etsy recommendations? Embed etsy recommendations in email alert
+
+Foursquare
+	
+Ordr.in
+	Add food ordering
+	###### Food ordering to eat in at home and watch a movie
+	###### Create a date at home. Get recommended foods and movies
+
+Tumblr
+	blog.johnbunting.me/api
+
+10gen
+	MongoDB
+	Gotta use this, good luck Karina
+	api.mongodb.org
+	
+	db.blog.find() -> Gets all db entries in db.blog
+
+	@francescapasha
+
+etsy
+	##### Obviously use this
+	##### Recommend gifts
+
+	Search by Color, Keyword, Price, etc.
+	developer.etsy.com
+	codeascraft.etsy.com
+	@etsyapi
+	stumm@etsy.com
+
+Nodejitsu
+	Node.js cloud
+	Public Cloud
+
+	hij1nx - github
+	hackny-chat.nodejit.su
+
+	gimmesomebeta.nodejitsu.com
+
+DonorsChoose.org
+	
+
+NextBigSound
+	samir@nextbigsound.com
+	Free stats on any artist
+
+	api3.nextbigsound.com
+	Contact samir for API key
+	
+	Artist Search
+	Artist Profiles
+		List of social media profiles
+	Artist Metrics
+
+
+Ambassadors:
+
+Jerry @ Voxee Plaid shirt with mustache
+	Gives you ideas, front end
+
+foursquare guy
+	not jscript
+
+Dan - lifebooker
+	ruby on rails office hours
+
+
+Office Hours:
+
+5PM: Node.js 201
+5:30PM: Python 312
+6:00PM: API Class 102
+6:30PM: Rails 
+
+
