@@ -1,24 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
 <?php
+
+	include 'debug.php';
 
 	$like = $_POST['like'];
 	$dislike = $_POST['dislike'];
 
 	//Add to like DB
-	if(isset($like) {
+	if(isset($like)) {
 		$likes = delimit_input($like);
-		var_dump($likes);
 
 	}
 	
 
 	//Add to dislike DB
-	if(isset($dislike) {
+	if(isset($dislike)) {
 		$dislikes = delimit_input($dislike);
-		var_dump($dislikes);
+
 	}
 
 	function delimit_input($items) {
-		return explode(' ,', $items);
+		return explode(',', $items);
 	}
 
 ?>
+</body>
+</html>
