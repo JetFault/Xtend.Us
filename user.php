@@ -1,49 +1,61 @@
 <?php
 
-$connection = new Mongo();
 
-public function createUser($userID, $userName) {
+function deleteUser
+
+
+function createUser($userID, $userName) {
+
+	$connection = new Mongo();
+
 	$db = $connection->allusers->list;
 
-	$db->insert(array("name"=> $userName,"ID" => $userID);
+	$db->insert(array("name"=> $userName,"ID" => $userID));
 }
 
+function getName($userID) {
 
-public function getName($userID) {
+	$connection = new Mongo();
+
 	$db = $connection->allusers->list;
-	$result = $db->find(array('ID' => $userID));
-
-	return $result['name'];
+	echo $userID;
+	$result = $db->find();
+/*	
+	foreach ($result as $ob){
+		echo $ob["name"];
+	}
+ */
+	return $result["name"];
 }
-public function getNumber($userID) {
+function getNumber($userID) {
 	$db = $connection->allusers->list;
 	$result = $db->find(array('ID' => $userID));
 
 	return $result['number'];
 }
-
-public function setNumber($userID, $number) {
+function setNumber($userID, $number) {
 
 }
 
-public function getUserIDbyPhone($phoneNumber) {
+function getUserIDbyPhone($phoneNumber) {
 	$db = $connection->allusers->list;
 	$result = $db->find(array('number' => $phoneNumber));
 	
 	return $result['ID'];
 }
 
-public function getActiveSigOther($userID) {
+function getActiveSigOther($userID) {
 }
 
-public function getAllSigOthers($userID) {
+function getAllSigOthers($userID) {
 	/* This should return a list of sigIDs.
 	 * Sorted chronologically from recent to past
-	 */
+ */
+
 }
 
-public function removeActiveSigOther($userID) {
+function removeActiveSigOther($userID) {
 }
 
-
+ 
 ?>
