@@ -18,7 +18,7 @@ public function createSigOther($userID, $sigName) {
 public function addAnniversary($sigID, $month, $day, $year) {
 }
 
-public function getAnniversary() {
+public function getAnniversary($sigID) {
 	/* Should return array
 	 * day=>
 	 * month=>
