@@ -34,20 +34,33 @@ function getName($userID) {
 	return $doc;
 }
 function getNumber($userID) {
+	$connection = new Mongo();
 	$db = $connection->allusers->list;
 	$result = $db->find(array('ID' => $userID));
 
-	return $result['number'];
+	foreach($result as $ob){
+		$doc = $ob["number"];
+	}
+	return $doc; 
 }
 function setNumber($userID, $number) {
+	$connection = new Mongo();
+	$db = $connection->allusers->list;
+	$criteria = array('$set' => array("number"=>$number));
+
+	$db->update(array("ID" => $userID), $criteria);
 
 }
 
 function getUserIDbyPhone($phoneNumber) {
+	$connection = new Mongo();
 	$db = $connection->allusers->list;
 	$result = $db->find(array('number' => $phoneNumber));
-	
-	return $result['ID'];
+
+	foreach($result as $ob){
+		$doc = $ob["ID"];
+	}	
+	return $doc;
 }
 
 function getActiveSigOther($userID) {
