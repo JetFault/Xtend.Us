@@ -1,11 +1,9 @@
 <?php
 
-$connection = new Mongo();
-
 #userID is the ID of master of relationship
 #sigID  is the ID of significant other
 
-public function createSigOther($userID, $sigName) {
+function createSigOther($userID, $sigName) {
 	/* This should create a new significant other entity.
 	 * Add that significant other to the list of significant others.
 	 * 
@@ -15,16 +13,21 @@ public function createSigOther($userID, $sigName) {
 	 * */
 }
 
-public function addAnniversary($sigID, $month, $day, $year) {
+function addAnniversary($usrID, $sigID, $month, $day, $year) {
+	$connection = new Mongo();
+	$collection = $connection->$usrID->$sigID;
+	$doc = array("type" => "anniversary","month" => $month,"day" => $day,"year" => $year);
+	$collection->insert($doc);
+
 }
 
-public function getAnniversary() {
+function getAnniversary() {
 	/* Should return array
 	 * day=>
 	 * month=>
 	 * year=>
 	 */
-
+/*
 	$month=;
 	$day=;
 	$year=;
@@ -35,31 +38,37 @@ public function getAnniversary() {
 		"year" => $year,
 	);
 	return $array;
+ */
 }
 
-public function addLike($userID,$sigusrID, $like) {
+function addLike($userID,$sigusrID, $like) {
+	$connection = new Mongo();
 	$db = $connection->$userID;
 	$collection = $db->$sigusrID;
 	$doc = array("type" => "like", "thing"=>$like);
 	$collection->insert($doc);
 }
 
-public function addDislike($userID,$sigusrID, $dislike) {
+function addDislike($userID,$sigusrID, $dislike) {
+
+	$connection = new Mongo();
 	$db = $connection->$userID;
 	$collection = $db->$sigusrID;
 	$doc = array("type"=> "dislike", "thing" => $dislike);
 	$collection->insert($doc);
 }
 
-public function getLikes($sigID) {
-	$db = $connection->$userID;
+function getLikes($usrID,$sigID) {
+	$connection = new Mongo();
+	$db = $connection->$usrID;
 	$collection = $db->$sigID;
 	$allLikes = $collection->find(array('type'=> 'like'));
 	
 	return $allLikes;
 }
 
-public function getDislikes($sigID) {
+function getDislikes($sigID) {
+	$connection = new Mongo();
 	$collection = $connection->$userID->$sigID;
 	$allDislikes = $collection->find(array('type' => 'dislike'));
 	
