@@ -78,7 +78,12 @@ function deleteThings($userID,$sigusrID, $thing){
 
 	$db->remove($criteria);
 }
-
+function deleteAni($userID, $sigUsr, $thing){
+	$connection = new Mongo();
+	$db = $connection->$userID->$sigUsr;
+	$criteria = array('type' => $thing);
+	$db->remove($criteria);
+}
 function getLikes($usrID,$sigID) {
 	$connection = new Mongo();
 	$db = $connection->$usrID;
