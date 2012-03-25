@@ -19,6 +19,7 @@ function addAnniversary($usrID, $sigID, $month, $day, $year) {
 	$doc = array("type" => "anniversary","month" => $month,"day" => $day,"year" => $year);
 	$collection->insert($doc);
 
+	$connection->close();
 }
 
 function getAnniversary($usrID, $sigID) {
@@ -61,6 +62,7 @@ function addLike($userID,$sigusrID, $like) {
 	$collection = $db->$sigusrID;
 	$doc = array("type" => "like", "thing"=>$like);
 	$collection->insert($doc);
+	$connection->close();
 }
 
 function addDislike($userID,$sigusrID, $dislike) {
@@ -70,6 +72,7 @@ function addDislike($userID,$sigusrID, $dislike) {
 	$collection = $db->$sigusrID;
 	$doc = array("type"=> "dislike", "thing" => $dislike);
 	$collection->insert($doc);
+	$connection->close();
 }
 function deleteThings($userID,$sigusrID, $thing){
 	$connection = new Mongo();
@@ -77,6 +80,7 @@ function deleteThings($userID,$sigusrID, $thing){
 	$criteria = array('thing' => $thing);
 
 	$db->remove($criteria);
+	$connection->close();
 }
 function deleteAni($userID, $sigUsr, $thing){
 	$connection = new Mongo();
