@@ -15,10 +15,10 @@ include("sigother.php");
 	session_start();
 
 	//Get Session
-	$userID = $_SESSION['userid'];
+
 
 	//userID session doesn't exist
-	if(!strlen($userID)) {
+	if(!isset($_SESSION['userid']) || !strlen($_SESSION['userid'])) {
 		$useridDB = getuserIDbyPhone($from);
 
 		//New user, ask them for name
@@ -33,6 +33,8 @@ include("sigother.php");
 
 		$_SESSION['userid'] = $useridDB;
 	}
+
+	$userID = $_SESSION['userid'];
 
 	//User responded with a name, add them to DB
 	if(strcmp($userID, "newuser") == 0) {
