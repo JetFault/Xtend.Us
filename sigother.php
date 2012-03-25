@@ -18,6 +18,25 @@ public function createSigOther($userID, $sigName) {
 public function addAnniversary($sigID, $month, $day, $year) {
 }
 
+public function getAnniversary() {
+	/* Should return array
+	 * day=>
+	 * month=>
+	 * year=>
+	 */
+
+	$month=;
+	$day=;
+	$year=;
+
+	$array = array(
+		"month" => $month,
+		"day" => $day,
+		"year" => $year,
+	);
+	return $array;
+}
+
 public function addLike($userID,$sigusrID, $like) {
 	$db = $connection->$userID;
 	$collection = $db->$sigusrID;
