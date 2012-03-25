@@ -10,30 +10,41 @@ public function createSigOther($userID, $sigName) {
 	 * Add that significant other to the list of significant others.
 	 * 
 	 * Only allow one active sig other.
+	 *
+	 * return sigID, mongo gives unique ids
 	 * */
 }
 
 public function addAnniversary($sigID, $month, $day, $year) {
 }
 
-public function addLike($userID, $like) {
+public function addLike($userID,$sigusrID, $like) {
 	$db = $connection->$userID;
-	$collection = $db->likes;
-	$doc = array($like);
+	$collection = $db->$sigusrID;
+	$doc = array("type" => "like", "thing"=>$like);
 	$collection->insert($doc);
 }
 
-public function addDislike($userID, $dislike) {
+public function addDislike($userID,$sigusrID, $dislike) {
 	$db = $connection->$userID;
-	$collection = $db->dislikes;
-	$doc = array($dislike);
+	$collection = $db->$sigusrID;
+	$doc = array("type"=> "dislike", "thing" => $dislike);
 	$collection->insert($doc);
 }
 
 public function getLikes($sigID) {
+	$db = $connection->$userID;
+	$collection = $db->$sigID;
+	$allLikes = $collection->find(array('type'=> 'like'));
+	
+	return $allLikes;
 }
 
 public function getDislikes($sigID) {
+	$collection = $connection->$userID->$sigID;
+	$allDislikes = $collection->find(array('type' => 'dislike'));
+	
+	return $allDislikes;
 }
 
 ?>
