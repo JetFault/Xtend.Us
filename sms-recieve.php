@@ -1,52 +1,51 @@
 <?php
 	
+session_start();
+
 include("config.php");
 include("user.php");
 include("sigother.php");
+
 
 	require("Services/Twilio.php");
 
 	$account_sid = $twilio_sid;
 	$auth_token = $twilio_token;
 
-	$text = $_POST['Body'];
 	$from = $_POST['From'];
 
-	session_start();
-
-	//Get Session
-
-
 	//userID session doesn't exist
-	if(!isset($_SESSION['userid']) || !strlen($_SESSION['userid'])) {
+	if(!isset($_SESSION['useridtwil']) || !strlen($_SESSION['useridtwil'])) {
 		$useridDB = getuserIDbyPhone($from);
 
 		//New user, ask them for name
 		if(!strlen($useridDB)) {
-			$_SESSION['userid'] = "newuser";
-			$sms_msg = "Hi! Looks like you're new to Relationship Extender, the {Boy,Girl}friend Management System of the future.
-				Please tell us your name so we can get you to stop sleeping on the couch ;)";
+			$_SESSION['useridtwil'] = "newuser";
+			$sms_msg = "Hi! Looks like you're new to Relationship Extender, the {Boy,Girl}friend Management System of the future. Please tell us your name so we can get you to stop sleeping on the couch ;)";
 			respond($sms_msg);
 			return;
 		}
 
 
-		$_SESSION['userid'] = $useridDB;
+		$_SESSION['useridtwil'] = $useridDB;
 	}
 
-	$userID = $_SESSION['userid'];
+	//Get Session
+	$userID = $_SESSION['useridtwil'];
 
 	//User responded with a name, add them to DB
 	if(strcmp($userID, "newuser") == 0) {
 		$uniqID = uniqid("usr_");
 		createUser($uniqID, $text);
 		setNumber($uniqID, $from);
-		$_SESSION['userid'] = $uniqID;
+		$_SESSION['useridtwil'] = $uniqID;
 
 		$sms_msg = print_help();
 		respond($sms_msg);
 		return;
 	}
+
+	$text = $_POST['Body'];
 
 	$msg_arr = explode(' ', strtolower(trim($text)));
 	$cmd = $msg_arr[0];
@@ -66,6 +65,9 @@ include("sigother.php");
 		break;
 	case "hate":
 		$sms_msg = add_hate(array_shift($msg_arr));
+		break;
+	case "break":
+		$sms_msg = logout();
 		break;
 	default:
 		$sms_msg = "Not a command! Send a text with \"help\" for more info!";
@@ -152,14 +154,24 @@ include("sigother.php");
 		return $mesg;
 	}
 
+	function logout() {
+		unset($_SESSION['useridtwil']);
+		$mesg = "";
+		return $mesg;
+	}
+
 
 	function respond($sms_mesg) {
+		$client = new Services_Twilio($account_sid, $auth_token);
+		$client->account->sms_messages->create($twilio_number, $from, $sms_mesg);
+		/*
 		header("content-type: text/xml");
 		echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		$sms_twiml = '<Sms>' . $sms_mesg . '</Sms>';
 		echo '<Response>';
 		echo $sms_twiml;
 		echo '</Response>';
+		 */
 	}
 
 ?>

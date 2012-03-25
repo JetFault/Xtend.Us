@@ -55,6 +55,8 @@ function getUserIDbyPhone($phoneNumber) {
 	$db = $connection->allusers->list;
 	$result = $db->find(array('number' => $phoneNumber));
 
+	$doc ="";
+
 	foreach($result as $ob){
 		$doc = $ob["ID"];
 	}	
