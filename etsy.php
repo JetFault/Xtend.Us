@@ -2,6 +2,14 @@
 
 include("config.php");
 
+$keyword = $_GET["keyword"];
+
+if(!isset($keyword)) {
+	return;
+}
+
+echo json_encode(getEtsyRecommendations($keyword));
+
 function getEtsyRecommendations($keyWords) {
 
 	$options="";
