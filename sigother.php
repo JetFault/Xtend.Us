@@ -21,22 +21,30 @@ public function addAnniversary($sigID, $month, $day, $year) {
 public function addLike($userID,$sigusrID, $like) {
 	$db = $connection->$userID;
 	$collection = $db->$sigusrID;
-	$doc = array(type: "like", thing:$like);
+	$doc = array("type" => "like", "thing"=>$like);
 	$collection->insert($doc);
 }
 
 public function addDislike($userID,$sigusrID, $dislike) {
 	$db = $connection->$userID;
 	$collection = $db->$sigusrID;
-	$doc = array(type:"dislike", thing:$dislike);
+	$doc = array("type"=> "dislike", "thing" => $dislike);
 	$collection->insert($doc);
 }
 
 public function getLikes($sigID) {
-
+	$db = $connection->$userID;
+	$collection = $db->$sigID;
+	$allLikes = $collection->find(array('type'=> 'like'));
+	
+	return $allLikes;
 }
 
 public function getDislikes($sigID) {
+	$collection = $connection->$userID->$sigID;
+	$allDislikes = $collection->find(array('type' => 'dislike'));
+	
+	return $allDislikes;
 }
 
 ?>
