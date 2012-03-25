@@ -1,5 +1,13 @@
 <?php
 
+function createUser($userID, $userName) {
+
+	$connection = new Mongo();
+
+	$db = $connection->allusers->list;
+
+	$db->insert(array("name"=> $userName,"ID" => $userID));
+}
 
 function deleteUser($userID){
 	$connection = new Mongo();
@@ -8,16 +16,6 @@ function deleteUser($userID){
 	$criteria = array('ID' => $userID);
 
 	$db->remove($criteria);
-}
-
-
-function createUser($userID, $userName) {
-
-	$connection = new Mongo();
-
-	$db = $connection->allusers->list;
-
-	$db->insert(array("name"=> $userName,"ID" => $userID));
 }
 
 function getName($userID) {
@@ -56,6 +54,8 @@ function getUserIDbyPhone($phoneNumber) {
 	$connection = new Mongo();
 	$db = $connection->allusers->list;
 	$result = $db->find(array('number' => $phoneNumber));
+
+	$doc ="";
 
 	foreach($result as $ob){
 		$doc = $ob["ID"];

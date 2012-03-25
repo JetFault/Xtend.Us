@@ -1,0 +1,26 @@
+div.intro {
+	color: red;
+	margin-top: 30px;
+}
+
+article {
+	width: auto;
+	margin: auto;
+}
+
+ul.forms {
+	padding-left: 0px;
+}
+
+ul.forms > li {
+	list-style: none;
+}
+
+ul.forms > div.txtBoxes > li {
+	margin-top: 10px;
+}
+
+ul.forms > div.txtBoxes > li > input {
+	position: fixed;
+	left: 90px;
+}

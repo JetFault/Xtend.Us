@@ -26,6 +26,7 @@ class Services_Twilio extends Services_Twilio_Resource
 
     protected $http;
     protected $version;
+    protected $versions = array('2008-08-01', '2010-04-01');
 
     /**
      * Constructor.
@@ -38,20 +39,34 @@ class Services_Twilio extends Services_Twilio_Resource
     public function __construct(
         $sid,
         $token,
-        $version = '2010-04-01',
+        $version = null,
         Services_Twilio_TinyHttp $_http = null
     ) {
-        $this->version = $version;
+        $this->version = in_array($version, $this->versions) ?
+                $version : $this->versions[count($this->versions)-1];
+
         if (null === $_http) {
             $_http = new Services_Twilio_TinyHttp(
                 "https://api.twilio.com",
-                array("curlopts" => array(CURLOPT_USERAGENT => self::USER_AGENT))
+                array("curlopts" => array(
+                    CURLOPT_USERAGENT => self::USER_AGENT,
+                    CURLOPT_CAINFO => dirname(__FILE__) . "/twilio_ssl_certificate.crt",
+                ))
             );
         }
         $_http->authenticate($sid, $token);
         $this->http = $_http;
         $this->accounts = new Services_Twilio_Rest_Accounts($this);
         $this->account = $this->accounts->get($sid);
+    }
+
+    /**
+     * Get the api version used by the rest client
+     *
+     * @return string the API version in use
+     */
+    public function getVersion() {
+        return $this->version;
     }
 
     /**
@@ -156,6 +171,9 @@ class Services_Twilio extends Services_Twilio_Resource
 
     private function _processXmlResponse($status, $headers, $body) {
         $decoded = simplexml_load_string($body);
+        if (200 <= $status && $status < 300) {
+            return $decoded;
+        }
         throw new Services_Twilio_RestException(
             (int)$decoded->Status,
             (string)$decoded->Message,
