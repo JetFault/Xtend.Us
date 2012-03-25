@@ -21,12 +21,25 @@ function addAnniversary($usrID, $sigID, $month, $day, $year) {
 
 }
 
-function getAnniversary($sigID) {
+function getAnniversary($usrID, $sigID) {
 	/* Should return array
 	 * day=>
 	 * month=>
 	 * year=>
 	 */
+	$connection = new Mongo();
+	$collection = $connection->$usrID->$sigID;
+	$criteria = array('type' => 'anniversary');
+	$doc = $collection->find($criteria);
+/*	
+	foreach($doc as $obj){
+		$month = $obj["month"];
+		$day = $obj["day"];
+		$year = $obj["year"];
+	}
+
+	$newarr = array("month" => $month, "day" => $day, "year" => $year);	
+ */
 /*
 	$month=;
 	$day=;
@@ -37,8 +50,9 @@ function getAnniversary($sigID) {
 		"day" => $day,
 		"year" => $year,
 	);
-	return $array;
- */
+	 */
+	return $doc;
+ 
 }
 
 function addLike($userID,$sigusrID, $like) {
@@ -57,7 +71,14 @@ function addDislike($userID,$sigusrID, $dislike) {
 	$doc = array("type"=> "dislike", "thing" => $dislike);
 	$collection->insert($doc);
 }
-function deleteThings($userID,
+function deleteThings($userID,$sigusrID, $thing){
+	$connection = new Mongo();
+	$db = $connection->$userID->$sigusrID;
+	$criteria = array('thing' => $thing);
+
+	$db->remove($criteria);
+}
+
 function getLikes($usrID,$sigID) {
 	$connection = new Mongo();
 	$db = $connection->$usrID;
@@ -67,7 +88,7 @@ function getLikes($usrID,$sigID) {
 	return $allLikes;
 }
 
-function getDislikes($sigID) {
+function getDislikes($userID, $sigID) {
 	$connection = new Mongo();
 	$collection = $connection->$userID->$sigID;
 	$allDislikes = $collection->find(array('type' => 'dislike'));
