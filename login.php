@@ -17,7 +17,17 @@
 					xfbml      : true,
 					oauth      : true,
 				});
-			};
+	
+          FB.api('/me', function(user) {
+            if (user) {
+              var image = document.getElementById('image');
+              image.src = 'http://graph.facebook.com/' + user.id + '/picture';
+              var name = document.getElementById('name');
+              name.innerHTML = user.name
+            }
+          });
+        };
+
 			(function(d){
 				var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
 				js = d.createElement('script'); js.id = id; js.async = true;
@@ -25,6 +35,12 @@
 				d.getElementsByTagName('head')[0].appendChild(js);
 			}(document));
 		</script>
-		<div class="fb-login-button">Login with Facebook</div>
+
+<!--		<div class="fb-login-button">Login with Facebook</div> -->
+
+		<div align="center">
+			<img id="image"/>
+			<div id="name"></div>
+		</div>
 	</body>
 </html>
